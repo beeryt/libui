@@ -85,9 +85,8 @@ GFX* Canvas::getGFXTree() const {
 void Canvas::drawRect(Vec2<int16_t> pos, Vec2<int16_t> size, Color border, Color fill) {
   auto gfx = getGFXTree();
   if (!gfx) return;
+  gfx->fillRect(pos.x,pos.y,size.x,size.y,fill.color);
   gfx->drawRect(pos.x, pos.y, size.x, size.y, border.color);
-  // TODO fill
-  gfx->drawRect(pos.x, pos.y, size.x, size.y, fill.color);
 }
 
 void Canvas::drawRect(Rect<int16_t> rect, Color border, Color fill) {
