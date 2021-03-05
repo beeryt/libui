@@ -14,4 +14,5 @@ public:
   void setDuration(int duration);
   int getProgress() const;
   int getDuration() const;
+  void draw() override;
 };
