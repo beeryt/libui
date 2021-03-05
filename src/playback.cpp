@@ -15,10 +15,12 @@ Playback::Playback(Node* parent, int duration)
 }
 
 void Playback::draw() {
-  int16_t x, y, width = getSize().x;
+  int16_t x, y, width;
 
   auto textSize = this->progress.getSize();
   assert(textSize == this->duration.getSize());
+
+  width = getSize().x;
 
   // set progress position
   x = padh;
