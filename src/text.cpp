@@ -12,6 +12,10 @@ void Text::setText(const char* text) {
 const char* Text::getText() const { return text; }
 
 void Text::draw() {
+  Vec2<int16_t> extent;
+  extent.x = strlen(text) * 6;
+  extent.y = 8;
+  drawRect(getGlobalPosition(), extent, Colors::black, Colors::black);
   drawText(getGlobalPosition(), text, fg, bg, size);
 }
 
