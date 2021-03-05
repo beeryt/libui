@@ -3,6 +3,7 @@
 #include "canvas.h"
 
 using ::testing::AtLeast;
+using ::testing::AtMost;
 using ::testing::AnyNumber;
 using ::testing::_;
 
@@ -28,10 +29,10 @@ TEST(Canvas, drawRect) {
   Canvas a, b(&a);
   a.setGFX(&gfx);
 
-  //EXPECT_CALL(gfx, drawRect(_, _, _, _, _)).Times(AnyNumber());
-  EXPECT_CALL(gfx, drawRect(_, _, _, _, blue.color)).Times(AtLeast(2));
-  EXPECT_CALL(gfx, drawRect(_, _, _, _, red.color)).Times(AtLeast(2));
-  EXPECT_CALL(gfx, drawRect(_, _, _, _, 0)).Times(AtLeast(2));
+  EXPECT_CALL(gfx, fillRect(_, _, _, _, blue.color)).Times(AtMost(2));
+  EXPECT_CALL(gfx, drawRect(_, _, _, _, red.color)).Times(AtMost(2));
+  EXPECT_CALL(gfx, fillRect(_, _, _, _, 0)).Times(AtMost(2));
+  EXPECT_CALL(gfx, drawRect(_, _, _, _, 0)).Times(AtMost(2));
 
   a.drawRect(r, red, blue);
   a.drawRect(r, {}, {});
