@@ -6,8 +6,16 @@ Text::Text(Node* parent, const char* text) : Canvas(parent), text(text) { update
 Text::Text(Node* parent) : Text(parent, "") {}
 Text::Text(const char* text) : Text(NULL, text) {}
 
+void Text::setBackground(Color color) { if (bg.color != color.color) update(); bg = color; }
+
+void Text::setTextSize(uint8_t s) {
+  if (size != s) update();
+  size = s;
+  setText(text);
+}
+
 void Text::setText(const char* text) {
-  if (strcmp(this->text, text)) update();
+  update(); // always assume update
   this->text = text;
 
   int lines = 1;
@@ -27,8 +35,8 @@ void Text::setText(const char* text) {
 
   // set size based on new text
   setSize({
-    static_cast<int16_t>(6 * width),
-    static_cast<int16_t>(8 * lines)
+    static_cast<int16_t>(6 * width * size),
+    static_cast<int16_t>(8 * lines * size)
   });
 }
 const char* Text::getText() const { return text; }

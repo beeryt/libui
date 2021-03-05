@@ -17,7 +17,7 @@ public:
   MOCK_METHOD(void, drawRect,       (int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color), (override));
   MOCK_METHOD(void, fillRect,       (int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color), (override));
   MOCK_METHOD(void, fillScreen,     (uint16_t color), (override));
-  MOCK_METHOD(void, invertDisplay,  (boolean i), (override));
+  MOCK_METHOD(void, invertDisplay,  (bool i), (override));
 };
 
 TEST(Canvas, drawRect) {

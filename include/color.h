@@ -24,6 +24,9 @@ struct Color {
   Color(uint16_t c = 0) : color(c) {}
   Color(uint8_t r, uint8_t g, uint8_t b) : Color(rgb_to_c(r, g, b)) {}
 
+  bool operator==(const Color& b) { return color == b.color; }
+  bool operator!=(const Color& b) { return color != b.color; }
+
   Color operator*(float scale) const {
     Color a = *this;
     uint8_t r,g,b;
