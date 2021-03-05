@@ -100,15 +100,20 @@ void Canvas::drawChar(Vec2<int16_t> position, char c, Color color, Color bg, uin
   gfx->drawChar(position.x, position.y, c, color.color, bg.color, size);
 }
 
-void Canvas::drawText(Vec2<int16_t> position, const char* text, Color color, Color, uint8_t size) {
-  Vec2<> cursor;
+void Canvas::drawText(Vec2<int16_t> position, const char* text, Color color, Color bg, uint8_t size) {
   auto gfx = getGFXTree();
   if (!gfx) return;
-  gfx->setCursor(position.x, position.y);
-  gfx->setTextColor(color.color);
-  gfx->setTextSize(size);
+  auto cursor = position;
   for (size_t i = 0; i < strlen(text); ++i) {
-    gfx->write(text[i]);
+    // detect newlines and move cursor
+    if (text[i] == '\n') {
+      cursor.x = position.x;
+      cursor.y += size*8;
+      continue;
+    }
+    // otherwise draw char and move cursor
+    gfx->drawChar(cursor.x, cursor.y, text[i], color.color, bg.color, size);
+    cursor.x += size*6;
   }
 }
 
