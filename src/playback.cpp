@@ -39,11 +39,6 @@ void Playback::draw() {
   x += this->slider.getPosition().x + padh;
   y = 0;
   this->duration.setPosition({x,y});
-
-  // since this would draw after its children tell the children to update
-  this->progress.update();
-  this->duration.update();
-  this->slider.update();
 }
 
 Playback::Playback(int duration) : Playback(NULL, duration) {}

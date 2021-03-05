@@ -42,13 +42,15 @@ bool Node::isProcessEnabled() const { return processEnabled; }
 void Node::setInput(bool enable) { inputEnabled = enable; }
 bool Node::isInputEnabled() const { return inputEnabled; }
 
+// process in pre-order so parents can update children first
 void Node::process() {
   if (!processEnabled) return;
+  _process();
   auto it = children.begin();
   while (it != children.end()) { (*it++).get().process(); }
-  _process();
 }
 
+// input is in post-order so children can handle input before parent
 bool Node::input(Event event) {
   if (!inputEnabled) return false;
   for (auto it = children.begin(); it != children.end(); ++it) {
