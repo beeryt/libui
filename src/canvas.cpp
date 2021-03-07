@@ -124,8 +124,8 @@ void Canvas::drawBitmap(Vec2<int16_t> pos, Bitmap bitmap) {
   if (!gfx) return;
   auto size = bitmap.getSize();
   int i = 0;
-  for (int16_t h = 0; h < size.y; ++h) {
-    for (int16_t w = 0; w < size.x; ++w) {
+  for (size_t h = 0; h < size.y; ++h) {
+    for (size_t w = 0; w < size.x; ++w) {
       float scale = bitmap.getBitmap()[i++] / 255.0f;
       Color scaled = bitmap.getColor() * scale;
       gfx->drawPixel(w+pos.x,h+pos.y,scaled.color);

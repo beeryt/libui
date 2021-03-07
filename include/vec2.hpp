@@ -15,7 +15,10 @@ bool Vec2<T>::operator!=(const Vec2<T>& rhs) const { return !(*this == rhs);  }
 
 template <typename T>
 Vec2<T> Vec2<T>::operator+(const Vec2<T>& rhs) {
-  return Vec2{ this->x + rhs.x, this->y + rhs.y };
+  return Vec2{
+    static_cast<T>(this->x + rhs.x),
+    static_cast<T>(this->y + rhs.y)
+  };
 }
 
 template <typename T>

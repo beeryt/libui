@@ -21,6 +21,12 @@ add_library(ui
 target_include_directories(ui PUBLIC include)
 target_link_libraries(ui PUBLIC gfx)
 
+find_package(SDL2_image REQUIRED)
+
+add_library(mp3 mp3/mp3.cpp)
+target_include_directories(mp3 PUBLIC mp3 ${SDL2_IMAGE_INCLUDE_DIRS})
+target_link_libraries(mp3 PUBLIC ui ${SDL2_IMAGE_LIBRARIES})
+
 if(NOT(MSVC))
 target_link_libraries(ui PRIVATE gcov)
 endif()

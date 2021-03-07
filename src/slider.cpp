@@ -9,7 +9,7 @@ void Slider::draw() {
   auto pos = getGlobalPosition();
   auto size = getSize();
 
-  int width = percent * size.x;
+  int16_t width = percent * size.x;
 
   Rect<int16_t> filled{ pos.x, pos.y, width, size.y };
   pos.x += width;

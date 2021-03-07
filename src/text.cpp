@@ -24,7 +24,7 @@ void Text::setText(const char* text) {
   // for each char: increment count
   // on newline: set width & increment lines & reset count
   int count = 0;
-  for (int i = 0; i < strlen(text); ++i) {
+  for (unsigned i = 0; i < strlen(text); ++i) {
     if (text[i] == '\n') {
       lines++;
       width = std::max(width, count);
