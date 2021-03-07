@@ -23,7 +23,7 @@ target_link_libraries(ui PUBLIC gfx)
 
 find_package(SDL2_image REQUIRED)
 
-add_library(mp3 mp3/mp3.cpp)
+add_library(mp3 mp3/mp3.cpp mp3/sdl.cpp)
 target_include_directories(mp3 PUBLIC mp3 ${SDL2_IMAGE_INCLUDE_DIRS})
 target_link_libraries(mp3 PUBLIC ui ${SDL2_IMAGE_LIBRARIES})
 

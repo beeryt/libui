@@ -3,6 +3,12 @@
 #include "playback.h"
 
 extern Canvas ui;
+Bitmap loadBitmap(const char*);
+
+extern Bitmap play_texture;
+extern Bitmap pause_texture;
+extern Bitmap next_texture;
+extern Bitmap prev_texture;
 
 class MP3 : public Canvas {
   public:

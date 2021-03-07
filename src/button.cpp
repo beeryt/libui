@@ -1,4 +1,5 @@
 #include "button.h"
+#include <algorithm>
 
 Button::Button(Node* parent) : BaseButton(parent) {
   addChild(text);
