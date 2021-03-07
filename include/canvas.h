@@ -36,6 +36,7 @@ class Canvas : public Node {
     virtual bool hasPoint(Vec2<> point) const;
 
     void update();                //! request draw call on next frame
+    void updateAll();             //! request draw call for this and all children
     bool willDraw() const;        //! whether a draw call was requested
 
     virtual void draw();          //! abstract implementation to draw the canvas item

@@ -7,6 +7,14 @@ void Canvas::hide() { visible = false; }
 bool Canvas::isVisible() const { return visible; }
 
 void Canvas::update() { needDraw = true; }
+void Canvas::updateAll() {
+  auto& children = getChildren();
+  update();
+  for (auto it = children.begin(); it != children.end(); ++it) {
+    Canvas* c = dynamic_cast<Canvas*>(&it->get());
+    if (c) c->updateAll();
+  }
+}
 
 bool Canvas::willDraw() const { return needDraw; }
 
