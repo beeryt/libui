@@ -13,7 +13,7 @@ class Node {
     bool inputEnabled = true;
 
   protected:
-    virtual void _process();
+    virtual void _process(uint32_t ms);
     virtual bool _input(Event);
 
   public:
@@ -32,7 +32,7 @@ class Node {
     bool isInputEnabled() const;
 
     // Attempts to update this node and its children
-    virtual void process();
+    virtual void process(uint32_t ms = 0);
     // Attempts to handle input for this node and its children
     virtual bool input(Event);
 };

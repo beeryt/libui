@@ -63,13 +63,13 @@ bool Canvas::hasPoint(Vec2<> point) const {
 
 void Canvas::draw() {}
 
-void Canvas::_process() {
+void Canvas::_process(uint32_t) {
   if (needDraw) { draw(); needDraw = false; }
 }
 
-void Canvas::process() {
+void Canvas::process(uint32_t ms) {
   if (!visible) return;
-  Node::process();
+  Node::process(ms);
 }
 
 bool Canvas::input(Event e) {

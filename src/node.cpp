@@ -43,11 +43,11 @@ void Node::setInput(bool enable) { inputEnabled = enable; }
 bool Node::isInputEnabled() const { return inputEnabled; }
 
 // process in pre-order so parents can update children first
-void Node::process() {
+void Node::process(uint32_t ms) {
   if (!processEnabled) return;
-  _process();
+  _process(ms);
   auto it = children.begin();
-  while (it != children.end()) { (*it++).get().process(); }
+  while (it != children.end()) { (*it++).get().process(ms); }
 }
 
 // input is in post-order so children can handle input before parent
@@ -60,7 +60,7 @@ bool Node::input(Event event) {
   return _input(event);
 }
 
-void Node::_process() {}
+void Node::_process(uint32_t) {}
 bool Node::_input(Event) {
   return false;
 }

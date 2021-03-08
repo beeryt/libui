@@ -17,7 +17,7 @@ class Canvas : public Node {
     GFX* gfx = nullptr;           //! A graphics object for drawing to
 
   protected:
-    void _process() override;
+    void _process(uint32_t ms) override;
 
   public:
     Canvas(Node* parent = NULL);
@@ -61,6 +61,6 @@ class Canvas : public Node {
     void drawChar(Vec2<int16_t> position, char c, Color color, Color bg, uint8_t size);
     void drawText(Vec2<int16_t> position, const char* text, Color color, Color bg, uint8_t size);
 
-    void process() override;
+    void process(uint32_t ms = 0) override;
     bool input(Event) override;
 };
