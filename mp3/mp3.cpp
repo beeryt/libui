@@ -73,7 +73,7 @@ MP3::MP3(short x, short y) {
 }
 
 void MP3::refreshLayout() {
-  printf("%s\n", __PRETTY_FUNCTION__);
+  printf("%s\n", __FUNCTION__);
   title.setTextSize(2);
 
   short x = getSize().x;
