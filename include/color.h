@@ -45,5 +45,6 @@ bool operator==(const Color& a, const Color& b);
 namespace Colors {
   const static Color white = Color{ 0xFF, 0xFF, 0xFF };
   const static Color black = Color{ 0x00, 0x00, 0x00 };
+  const static Color magenta = Color{ 0xFF, 0x00, 0xFF };
 }
 

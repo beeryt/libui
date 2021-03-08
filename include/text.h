@@ -2,7 +2,7 @@
 #include "canvas.h"
 
 class Text : public Canvas {
-  private:
+  protected:
     const char* text;
     Color fg = Colors::white;
     Color bg = Colors::black;

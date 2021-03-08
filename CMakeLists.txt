@@ -33,6 +33,7 @@ add_library(ui
   src/button.cpp
   src/texturebutton.cpp
   src/bitmap.cpp
+  src/marquee.cpp
   )
 target_include_directories(ui PUBLIC include)
 target_link_libraries(ui PUBLIC gfx)

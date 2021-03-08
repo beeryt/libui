@@ -28,3 +28,18 @@ Vec2<T>& Vec2<T>::operator+=(const Vec2<T>& rhs) {
   return *this;
 }
 
+template <typename T>
+Vec2<T> Vec2<T>::operator-(const Vec2<T>& rhs) {
+  return Vec2<T>{
+    static_cast<T>(this->x - rhs.x),
+    static_cast<T>(this->y - rhs.y)
+  };
+}
+
+template <typename T>
+Vec2<T>& Vec2<T>::operator-=(const Vec2<T>& rhs) {
+  this->x -= rhs.x;
+  this->y -= rhs.y;
+  return *this;
+}
+

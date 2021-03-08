@@ -8,6 +8,8 @@ struct Vec2 {
   Vec2(T x = 0, T y = 0);
   Vec2 operator+(const Vec2& rhs);
   Vec2& operator+=(const Vec2& rhs);
+  Vec2 operator-(const Vec2& rhs);
+  Vec2& operator-=(const Vec2& rhs);
   bool operator!=(const Vec2& rhs) const;
   bool operator==(const Vec2& rhs) const;
 };

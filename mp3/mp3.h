@@ -1,5 +1,6 @@
 #pragma once
 #include "canvas.h"
+#include "marquee.h"
 #include "playback.h"
 
 Bitmap loadBitmap(const char*);
@@ -14,8 +15,8 @@ class MP3 : public Canvas {
     MP3(short x, short y);
     void refreshLayout();
 
-    Text title;
-    Text artist;
+    Marquee title;
+    Marquee artist;
     Playback playback;
     Canvas controls;
 };

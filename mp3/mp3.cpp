@@ -2,10 +2,6 @@
 #include "texturebutton.h"
 #include <assert.h>
 
-namespace Colors {
-  static const Color magenta{ 0xFF, 0x00, 0xFF };
-}
-
 class ColorRect : public Canvas {
   public:
     ColorRect(Node* parent, Color fg) : Canvas(parent), fg(fg) {}
@@ -74,7 +70,9 @@ MP3::MP3(short x, short y) {
 
 void MP3::refreshLayout() {
   printf("%s\n", __FUNCTION__);
-  title.setTextSize(2);
+  title.setTextSize(3);
+  artist.setTextSize(2);
+  artist.setSpeed(30);
 
   short x = getSize().x;
   short y = getSize().y;
@@ -83,9 +81,14 @@ void MP3::refreshLayout() {
       static_cast<int16_t>(y/2)
   };
 
+  title.setSize({ x - 64, title.getSize().y });
+  artist.setSize({ x - 64, title.getSize().y });
   controls.setSize({ x, 64 });
   playback.setSize({ x, 8 });
 
+
+  title.setDebug(true);
+  artist.setDebug(true);
   title.setPosition(Vec2<>{
       static_cast<int16_t>(32),
       static_cast<int16_t>(center.y - title.getSize().y)

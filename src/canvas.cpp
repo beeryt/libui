@@ -102,6 +102,13 @@ void Canvas::drawRect(Rect<int16_t> rect, Color border, Color fill) {
   drawRect({ rect.x,rect.y }, { rect.w,rect.h }, border, fill);
 }
 
+void Canvas::drawLine(Vec2<> start, Vec2<> end, Color fg) {
+  auto gfx = getGFXTree();
+  if (!gfx) return;
+  if (start == end) return;
+  gfx->drawLine(start.x, start.y, end.x, end.y, fg.color);
+}
+
 void Canvas::drawChar(Vec2<int16_t> position, char c, Color color, Color bg, uint8_t size) {
   auto gfx = getGFXTree();
   if (!gfx) return;
