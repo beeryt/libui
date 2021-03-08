@@ -1,6 +1,5 @@
 #pragma once
 #include "canvas.h"
-#include "text.h"
 
 class Text : public Canvas {
   private:

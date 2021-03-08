@@ -1,6 +1,5 @@
 #pragma once
 #include "event.h"
-#include <functional>
 #include <vector>
 
 
