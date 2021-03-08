@@ -28,11 +28,12 @@ Bitmap loadBitmap(const char* filename) {
 
   IMG_LoadPNM_RW(nullptr);
 
-  uint32_t x = surface->w;
-  uint32_t y = surface->h;
+  unsigned x = surface->w;
+  unsigned y = surface->h;
+  unsigned size = x * y;
   printf("Opened %s (%d,%d)\n", filename, x, y);
 
-  uint8_t *data = new uint8_t[x*y];
+  uint8_t *data = new uint8_t[size];
 
   SDL_ConvertPixels(x, y,
       // source info

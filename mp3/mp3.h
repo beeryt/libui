@@ -2,7 +2,6 @@
 #include "canvas.h"
 #include "playback.h"
 
-extern Canvas ui;
 Bitmap loadBitmap(const char*);
 
 extern Bitmap play_texture;
