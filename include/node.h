@@ -1,6 +1,7 @@
 #pragma once
 #include "event.h"
 #include <vector>
+#include <functional>
 
 
 class Node {
