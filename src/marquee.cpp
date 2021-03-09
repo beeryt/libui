@@ -11,13 +11,14 @@ bool Marquee::getSmooth() const { return smooth; }
 void Marquee::setSpeed(uint32_t s) { if (speed != s) update(); speed = s; }
 uint32_t Marquee::getSpeed() const { return speed; }
 
-void Marquee::setDebug(bool debug) { if (this->debug != debug) update(); this->debug = debug; }
+void Marquee::setDebugColor(Color color) { if (debug_color != color) update(); debug_color = color; }
 
 void Marquee::draw() {
   int16_t charWidth = 6 * size;
   int16_t charHeight = 8 * size;
   int16_t scrnWidth = std::ceil(static_cast<float>(getSize().x) / charWidth);
   int16_t textWidth = strlen(text) * charWidth;
+  int16_t charOverhang = getSize().x % charWidth;
 
   if (smooth) scrnWidth++; // with smooth scrolling an additional char is needed
 
@@ -55,7 +56,8 @@ void Marquee::draw() {
   // draw first char
   assert(pos.x > 0);
   drawChar(pos, display[0], fg, bg, size);
-  fillRect(pos, { pixelOffset, charHeight }, debug_color);
+  Vec2<> rectSize{ pixelOffset,charHeight };
+  fillRect(pos, rectSize, debug_color);
 
   // draw remaining text
   pos.x += charWidth;
@@ -64,7 +66,8 @@ void Marquee::draw() {
   if (smooth) {
     // clear last char overhang
     pos.x = getGlobalPosition().x + getSize().x;
-    fillRect(pos, { charWidth, charHeight }, debug_color);
+    rectSize.x = charWidth + charOverhang - pixelOffset;
+    fillRect(pos, rectSize, debug_color);
   }
 }
 

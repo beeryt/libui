@@ -1,6 +1,10 @@
 #pragma once
 #include "text.h"
 
+#ifndef IAR_COMPILER
+#include <string>
+#endif
+
 class Marquee : public Text {
   protected:
     uint32_t delta = 0;
@@ -24,14 +28,10 @@ class Marquee : public Text {
     void draw();
     void process(uint32_t ms) override;
 
-    void setDebug(bool);
-    bool getDebug() const;
-
     void setDebugColor(Color);
     Color getDebugColor() const;
 
   private:
-    bool debug = false;
     Color debug_color = Colors::black;
     int32_t delay_countdown = delay;
     Vec2<> last_pos = {};

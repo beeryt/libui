@@ -76,9 +76,6 @@ void MP3::refreshLayout() {
   y = 8;
   playback.setSize({ x,y });
 
-  title.setDebug(true);
-  artist.setDebug(true);
-
   x = songDetailPadding.x;
   y = center.y - title.getSize().y;
   title.setPosition(Vec2<>{ x,y });
