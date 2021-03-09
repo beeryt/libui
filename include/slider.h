@@ -6,6 +6,7 @@ class Slider : public Canvas {
   private:
     int value, min, max;
     float percent;
+    int16_t last_width = 0;
     void setPercent();
     Color fg = Colors::white;
     Color bg = Colors::black;

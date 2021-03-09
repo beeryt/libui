@@ -16,6 +16,13 @@ void Slider::draw() {
   size.x -= width;
   Rect<int16_t> empty{ pos.x, pos.y, size.x, size.y };
 
+  // when width is smaller than last frame, clear the empty zone
+  // otherwise the center will be 'filled' from the last frame
+  if (last_width != width) {
+    if (width < last_width) fillRect(empty, bg);
+    last_width = width;
+  }
+
   // TODO consider optional slider with border
   fillRect(filled, fg);
   drawRect(empty,  fg*0.125);
