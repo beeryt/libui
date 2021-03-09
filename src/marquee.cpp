@@ -14,50 +14,58 @@ uint32_t Marquee::getSpeed() const { return speed; }
 void Marquee::setDebug(bool debug) { if (this->debug != debug) update(); this->debug = debug; }
 
 void Marquee::draw() {
-  const int16_t charWidth = 6 * size;
+  int16_t charWidth = 6 * size;
+  int16_t charHeight = 8 * size;
+  int16_t scrnWidth = std::ceil(static_cast<float>(getSize().x) / charWidth);
+  int16_t textWidth = strlen(text) * charWidth;
 
-  // update the pixel offset
-  int pixelShift = delta / speed; // one pixel every speed milliseconds
-  offset += pixelShift;
-  int maxWidth = strlen(text) * charWidth;
-  offset %= maxWidth;
+  if (smooth) scrnWidth++; // with smooth scrolling an additional char is needed
+
+  // update offset
+  offset += delta / speed; // advance one pixel every SPEED milliseconds
+  delta %= speed; // reset delta for next draw call
+
+  offset %= textWidth; // TODO: remove abrupt reset
 
   // if delay is active, reset offset
   delay_countdown -= delta;
-  if (delay_countdown > 0) { offset = 0; }
+  if (delay_countdown > 0) offset = 0;
 
-  // figure out how many chars are truncated from start of string
-  unsigned truncatedChars = offset / charWidth;
-  assert(truncatedChars < strlen(text));
+  // prepare text for display
+  int16_t charOffset = offset / charWidth;
+  std::string display = std::string{ text }.substr(charOffset, scrnWidth);
+  display += ' '; // empty char helps clear end-of-string as moves to left
 
-  // prepare the substr for display
-  size_t maxChars = std::ceil(static_cast<float>(getSize().x) / charWidth);
-  size_t extraPixels = (maxChars * charWidth) % getSize().x;
-  if (smooth) maxChars++; // smooth scrolling allows a single extra char
-  std::string str = std::string{ text }.substr(truncatedChars, maxChars);
+  // determine text location
+  int16_t pixelOffset = smooth ? (offset % charWidth) : 0;
+  if (pixelOffset % size != 0) return; // skip, unless pixelOffset is multiple of size
+  auto pos = getGlobalPosition() - Vec2<>{ pixelOffset, 0 };
 
-  const auto color = debug ? debug_color : bg;
+  // skip draw if nothing has changed
+  if (pos == last_pos && display == last_display) return;
+  else { last_pos = pos; last_display = display; }
 
-  // iff smooth: find sub-char pixel offset
-  int16_t charOffset = smooth ? offset % charWidth : 0;
+  // TODO: This draw routine could benefit from being able to draw partial chars.
+  // Two methods that come to mind:
+  //            1. Additional GFX::drawChar method
+  //            2. Virtual GFX target which clips bounds
+  // Without this feature the screen will display flickering to the left and
+  // right of the marquee text.
 
-  // draw text
-  auto pos = getGlobalPosition();
-  pos.x -= charOffset;
-  drawText(pos, str.c_str(), fg, bg, size);
+  // draw first char
+  assert(pos.x > 0);
+  drawChar(pos, display[0], fg, bg, size);
+  fillRect(pos, { pixelOffset, charHeight }, debug_color);
 
-  // clear left overhang
-  Vec2<> s{ charWidth, getSize().y };
-  pos.x = getGlobalPosition().x - charWidth;
-  fillRect(pos, s, color);
+  // draw remaining text
+  pos.x += charWidth;
+  drawText(pos, display.substr(1).c_str(), fg, bg, size);
 
-  // clear right overhang
-  s.x = extraPixels + (smooth ? s.x : 0);
-  pos.x = getGlobalPosition().x + getSize().x;
-  fillRect(pos, s, color);
-
-  // reset delta for next draw call
-  delta %= speed;
+  if (smooth) {
+    // clear last char overhang
+    pos.x = getGlobalPosition().x + getSize().x;
+    fillRect(pos, { charWidth, charHeight }, debug_color);
+  }
 }
 
 void Marquee::process(uint32_t ms) {

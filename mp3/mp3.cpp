@@ -52,6 +52,7 @@ void MP3::refreshLayout() {
   printf("%s\n", __FUNCTION__);
   title.setTextSize(3);
   artist.setTextSize(2);
+  title.setSpeed(50);
   artist.setSpeed(30);
 
   const auto size = getSize();
@@ -59,7 +60,7 @@ void MP3::refreshLayout() {
   short x = size.x;
   short y = size.y;
 
-  const Vec2<short> songDetailPadding{ 16, 0 };
+  const Vec2<short> songDetailPadding{ 24, 0 };
 
   x = size.x - 2 * songDetailPadding.x;
   y = title.getSize().y;

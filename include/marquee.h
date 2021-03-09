@@ -32,6 +32,8 @@ class Marquee : public Text {
 
   private:
     bool debug = false;
-    Color debug_color = Colors::magenta;
+    Color debug_color = Colors::black;
     int32_t delay_countdown = delay;
+    Vec2<> last_pos = {};
+    std::string last_display;
 };
