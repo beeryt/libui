@@ -28,7 +28,7 @@ void Marquee::draw() {
   if (delay_countdown > 0) { offset = 0; }
 
   // figure out how many chars are truncated from start of string
-  int truncatedChars = offset / charWidth;
+  unsigned truncatedChars = offset / charWidth;
   assert(truncatedChars < strlen(text));
 
   // prepare the substr for
@@ -65,7 +65,7 @@ void Marquee::draw() {
 }
 
 void Marquee::process(uint32_t ms) {
-  const bool needToSlide = strlen(text) > (getSize().x / (6 * size));
+  const bool needToSlide = strlen(text) > static_cast<size_t>(getSize().x / (6 * size));
   if (needToSlide) {
     if (ms > 0) update();
     delta += ms;
