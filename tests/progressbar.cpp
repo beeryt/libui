@@ -24,10 +24,10 @@ TEST(ProgressBar, setValUpdates) {
   ProgressBar a;
 
   a.process();
-  EXPECT_FALSE(a.willDraw());
+  EXPECT_FALSE(a.willUpdate());
 
   a.setVal(4);
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 }
 
 TEST(ProgressBar, setValGreaterThanMax) {
@@ -73,10 +73,10 @@ TEST(ProgressBar, setMinUpdates) {
   ProgressBar a;
 
   a.process();
-  EXPECT_FALSE(a.willDraw());
+  EXPECT_FALSE(a.willUpdate());
 
   a.setMin(4);
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 }
 
 TEST(ProgressBar, setMinGreaterThanValue) {
@@ -124,10 +124,10 @@ TEST(ProgressBar, setMaxUpdates) {
 
   a.setVal(1); // an update is needed only if the percentage changes
   a.process();
-  EXPECT_FALSE(a.willDraw());
+  EXPECT_FALSE(a.willUpdate());
 
   a.setMax(4);
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 }
 
 TEST(ProgressBar, setMaxLessThanValue) {

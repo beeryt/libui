@@ -29,15 +29,14 @@ TEST(Canvas, drawRect) {
   Canvas a, b(&a);
   a.setGFX(&gfx);
 
-  EXPECT_CALL(gfx, fillRect(_, _, _, _, blue.color)).Times(AtMost(2));
-  EXPECT_CALL(gfx, drawRect(_, _, _, _, red.color)).Times(AtMost(2));
-  EXPECT_CALL(gfx, fillRect(_, _, _, _, 0)).Times(AtMost(2));
-  EXPECT_CALL(gfx, drawRect(_, _, _, _, 0)).Times(AtMost(2));
+  EXPECT_CALL(gfx, fillRect(_, _, _, _, blue.color)).Times(AtMost(1));
+  b.drawRect(r, blue);
 
-  a.drawRect(r, red, blue);
-  a.drawRect(r, {}, {});
-  b.drawRect(r, red, blue);
-  b.drawRect(r, {}, {});
+  EXPECT_CALL(gfx, drawRect(_, _, _, _, red.color)).Times(AtMost(1));
+  a.drawRect(r, red);
+
+  EXPECT_CALL(gfx, drawRect(_, _, _, _, 0)).Times(AtMost(1));
+  b.drawRect(r, {});
 }
 
 TEST(Canvas, drawText) {

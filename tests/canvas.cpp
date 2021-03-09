@@ -22,7 +22,7 @@ TEST(Canvas, Constructor) {
   EXPECT_EQ(Vec2<>{}, a.getPosition());
   EXPECT_EQ(Vec2<>{}, a.getGlobalPosition());
   EXPECT_EQ(Rect<>{}, a.getRect());
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
   EXPECT_EQ(nullptr, a.getGFX());
   EXPECT_EQ(nullptr, a.getGFXTree());
 
@@ -32,7 +32,7 @@ TEST(Canvas, Constructor) {
   EXPECT_EQ(Vec2<>{}, b.getPosition());
   EXPECT_EQ(Vec2<>{}, b.getGlobalPosition());
   EXPECT_EQ(Rect<>{}, b.getRect());
-  EXPECT_TRUE(b.willDraw());
+  EXPECT_TRUE(b.willUpdate());
   EXPECT_EQ(nullptr, b.getGFX());
   EXPECT_EQ(nullptr, b.getGFXTree());
 }
@@ -56,17 +56,17 @@ TEST(Canvas, MethodSetSize) {
   a.process();
   a.setSize(expected);
   EXPECT_EQ(expected, a.getSize());
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 
   a.process();
   a.setSize(Vec2<>{});
   EXPECT_EQ(Vec2<>{}, a.getSize());
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 
   a.process();
   a.setSize(Vec2<>{});
   EXPECT_EQ(Vec2<>{}, a.getSize());
-  EXPECT_FALSE(a.willDraw());
+  EXPECT_FALSE(a.willUpdate());
 }
 
 TEST(Canvas, MethodSetPosition) {
@@ -76,17 +76,17 @@ TEST(Canvas, MethodSetPosition) {
   a.process();
   a.setPosition(expected);
   EXPECT_EQ(expected, a.getPosition());
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 
   a.process();
   a.setPosition(Vec2<>{});
   EXPECT_EQ(Vec2<>{}, a.getPosition());
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 
   a.process();
   a.setPosition(Vec2<>{});
   EXPECT_EQ(Vec2<>{}, a.getPosition());
-  EXPECT_FALSE(a.willDraw());
+  EXPECT_FALSE(a.willUpdate());
 }
 
 TEST(dynamic_cast, bad_cast_is_null) {
@@ -176,9 +176,9 @@ TEST(Canvas, setGFX) {
 TEST(Canvas, update) {
   Canvas a;
   a.process();
-  EXPECT_FALSE(a.willDraw());
+  EXPECT_FALSE(a.willUpdate());
   a.update();
-  EXPECT_TRUE(a.willDraw());
+  EXPECT_TRUE(a.willUpdate());
 }
 
 #define EXPECT_COUNT(...) { SCOPED_TRACE("EXPECT_COUNT"); expect_count(__VA_ARGS__); }
