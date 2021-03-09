@@ -22,6 +22,13 @@ extern Bitmap pause_texture;
 extern Bitmap next_texture;
 extern Bitmap prev_texture;
 
+class Controls : public Canvas {
+public:
+  TextureButton prev, play, next;
+  Controls();
+  void refreshLayout();
+};
+
 class MP3 : public Canvas {
   public:
     MP3(short x, short y);
@@ -30,6 +37,6 @@ class MP3 : public Canvas {
     Marquee title;
     Marquee artist;
     Playback playback;
-    Canvas controls;
+    Controls controls;
 };
 

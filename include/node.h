@@ -1,5 +1,4 @@
 #pragma once
-#if 0
 #include "event.h"
 #include <vector>
 
@@ -35,4 +34,3 @@ class Node {
     // Attempts to handle input for this node and its children
     virtual bool input(Event);
 };
-#endif
