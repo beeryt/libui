@@ -6,45 +6,12 @@ void Canvas::show() { visible = true; }
 void Canvas::hide() { visible = false; }
 bool Canvas::isVisible() const { return visible; }
 
-void Canvas::update() { needDraw = true; }
-void Canvas::updateAll() {
-  auto& children = getChildren();
-  update();
-  for (auto it = children.begin(); it != children.end(); ++it) {
-    Canvas* c = dynamic_cast<Canvas*>(&it->get());
-    if (c) c->updateAll();
-  }
-}
-
-bool Canvas::willDraw() const { return needDraw; }
-
 void Canvas::setSize(Vec2<> size) {
   if (this->size != size) update();
   this->size = size;
 }
 
 Vec2<> Canvas::getSize() const { return size; }
-
-void Canvas::setPosition(Vec2<> pos) {
-  if (this->position != pos) { update(); }
-  this->position = pos;
-}
-
-Vec2<> Canvas::getPosition() const { return position; }
-
-Vec2<> Canvas::getGlobalPosition() const {
-  Vec2<> accumulator;
-  const Node* n = this;
-  while (n) {
-      // attempt to cast to Canvas*
-      // with -fno-exceptions set I am making an assumption that
-      // dynamic_cast returns nullptr on std::bad_cast
-      auto c = dynamic_cast<const Canvas*>(n);
-      if (c) accumulator += c->position;
-    n = n->getParent();
-  }
-  return accumulator;
-}
 
 Rect<> Canvas::getRect() const {
   return {
@@ -64,7 +31,7 @@ bool Canvas::hasPoint(Vec2<> point) const {
 void Canvas::draw() {}
 
 void Canvas::_process(uint32_t) {
-  if (needDraw) { draw(); needDraw = false; }
+  if (needUpdate) { draw(); needUpdate = false; }
 }
 
 void Canvas::process(uint32_t ms) {
@@ -75,19 +42,6 @@ void Canvas::process(uint32_t ms) {
 bool Canvas::input(Event e) {
   if (!visible) return false;
   return Node::input(e);
-}
-
-void Canvas::setGFX(GFX* gfx) { this->gfx = gfx; update(); }
-GFX* Canvas::getGFX() const { return gfx; }
-GFX* Canvas::getGFXTree() const {
-  GFX* gfx = nullptr;
-  const Node* n = this;
-  while (!gfx && n) {
-    auto c = dynamic_cast<const Canvas*>(n);
-    if (c) gfx = c->getGFX();
-    n = n->getParent();
-  }
-  return gfx;
 }
 
 void Canvas::drawRect(Vec2<int16_t> pos, Vec2<int16_t> size, Color border, Color fill) {

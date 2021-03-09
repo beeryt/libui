@@ -64,3 +64,43 @@ void Node::_process(uint32_t) {}
 bool Node::_input(Event) {
   return false;
 }
+void Node::setPosition(Vec2<> pos) {
+  if (this->position != pos) { update(); }
+  this->position = pos;
+}
+
+Vec2<> Node::getPosition() const { return position; }
+
+Vec2<> Node::getGlobalPosition() const {
+  Vec2<> accumulator;
+  const Node* n = this;
+  while (n) {
+    accumulator += n->position;
+    n = n->getParent();
+  }
+  return accumulator;
+}
+
+void Node::update() { needUpdate = true; }
+void Node::updateAll() {
+  auto& children = getChildren();
+  update();
+  for (auto it = children.begin(); it != children.end(); ++it) {
+    auto n = &it->get();
+    n->updateAll();
+  }
+}
+
+bool Node::willUpdate() const { return needUpdate; }
+
+void Node::setGFX(GFX* gfx) { this->gfx = gfx; update(); }
+GFX* Node::getGFX() const { return gfx; }
+GFX* Node::getGFXTree() const {
+  GFX* gfx = nullptr;
+  const Node* n = this;
+  while (!gfx && n) {
+    gfx = n->getGFX();
+    n = n->getParent();
+  }
+  return gfx;
+}
