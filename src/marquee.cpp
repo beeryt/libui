@@ -22,7 +22,7 @@ void Marquee::draw() {
   int maxWidth = strlen(text) * charWidth;
   offset %= maxWidth;
 
-  // if delay is active reset offset
+  // if delay is active, reset offset
   delay_countdown -= delta;
   if (delay_countdown > 0) { offset = 0; }
 
@@ -30,16 +30,13 @@ void Marquee::draw() {
   unsigned truncatedChars = offset / charWidth;
   assert(truncatedChars < strlen(text));
 
-  // prepare the substr for
+  // prepare the substr for display
   size_t maxChars = std::ceil(static_cast<float>(getSize().x) / charWidth);
   size_t extraPixels = (maxChars * charWidth) % getSize().x;
   if (smooth) maxChars++; // smooth scrolling allows a single extra char
   std::string str = std::string{ text }.substr(truncatedChars, maxChars);
 
   const auto color = debug ? debug_color : bg;
-
-  // clear drawing zone
-  drawRect(getGlobalPosition(), getSize(), bg, bg);
 
   // iff smooth: find sub-char pixel offset
   int16_t charOffset = smooth ? offset % charWidth : 0;
@@ -49,15 +46,15 @@ void Marquee::draw() {
   pos.x -= charOffset;
   drawText(pos, str.c_str(), fg, bg, size);
 
-  // clear left-overhang
+  // clear left overhang
   Vec2<> s{ charWidth, getSize().y };
   pos.x = getGlobalPosition().x - charWidth;
-  drawRect(pos, s, color, color);
+  fillRect(pos, s, color);
 
-  // clear right-overhang
-  pos.x = getGlobalPosition().x + getSize().x;
+  // clear right overhang
   s.x = extraPixels + (smooth ? s.x : 0);
-  drawRect(pos, s, color, color);
+  pos.x = getGlobalPosition().x + getSize().x;
+  fillRect(pos, s, color);
 
   // reset delta for next draw call
   delta %= speed;

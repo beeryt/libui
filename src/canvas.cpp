@@ -44,16 +44,26 @@ bool Canvas::input(Event e) {
   return Node::input(e);
 }
 
-void Canvas::drawRect(Vec2<int16_t> pos, Vec2<int16_t> size, Color border, Color fill) {
+void Canvas::drawRect(Vec2<int16_t> pos, Vec2<int16_t> size, Color border) {
+  auto gfx = getGFXTree();
+  if (!gfx) return;
+  if (size.x == 0 || size.y == 0) return;
+  gfx->drawRect(pos.x, pos.y, size.x, size.y, border.color);
+}
+
+void Canvas::fillRect(Vec2<int16_t> pos, Vec2<int16_t> size, Color fill) {
   auto gfx = getGFXTree();
   if (!gfx) return;
   if (size.x == 0 || size.y == 0) return;
   gfx->fillRect(pos.x,pos.y,size.x,size.y,fill.color);
-  gfx->drawRect(pos.x, pos.y, size.x, size.y, border.color);
 }
 
-void Canvas::drawRect(Rect<int16_t> rect, Color border, Color fill) {
-  drawRect({ rect.x,rect.y }, { rect.w,rect.h }, border, fill);
+void Canvas::drawRect(Rect<int16_t> rect, Color border) {
+  drawRect({ rect.x,rect.y }, { rect.w,rect.h }, border);
+}
+
+void Canvas::fillRect(Rect<int16_t> rect, Color fill) {
+  fillRect({ rect.x,rect.y }, { rect.w,rect.h }, fill);
 }
 
 void Canvas::drawLine(Vec2<> start, Vec2<> end, Color fg) {

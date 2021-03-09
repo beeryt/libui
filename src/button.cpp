@@ -18,5 +18,5 @@ void Button::setBackground(Color color) {
 
 void Button::draw() {
   Vec2<> size{ std::max(getSize().x, text.getSize().x), std::max(getSize().y, text.getSize().y) };
-  drawRect(getGlobalPosition(), size, bg, bg);
+  drawRect(getGlobalPosition(), size, bg);
 }

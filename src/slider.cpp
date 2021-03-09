@@ -17,8 +17,8 @@ void Slider::draw() {
   Rect<int16_t> empty{ pos.x, pos.y, size.x, size.y };
 
   // TODO consider optional slider with border
-  drawRect(filled, fg, fg);
-  drawRect(empty,  fg*0.125, bg);
+  fillRect(filled, fg);
+  drawRect(empty,  fg*0.125);
 }
 
 void Slider::setPercent() {

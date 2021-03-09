@@ -54,7 +54,6 @@ void MP3::refreshLayout() {
   artist.setTextSize(2);
   artist.setSpeed(30);
 
-
   const auto size = getSize();
   const auto center = size / 2;
   short x = size.x;
@@ -62,7 +61,7 @@ void MP3::refreshLayout() {
 
   const Vec2<short> songDetailPadding{ 16, 0 };
 
-  x -= 2 * songDetailPadding.x;
+  x = size.x - 2 * songDetailPadding.x;
   y = title.getSize().y;
   title.setSize({ x,y });
 
@@ -75,7 +74,6 @@ void MP3::refreshLayout() {
 
   y = 8;
   playback.setSize({ x,y });
-
 
   title.setDebug(true);
   artist.setDebug(true);

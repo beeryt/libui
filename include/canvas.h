@@ -29,8 +29,10 @@ class Canvas : public Node {
 
     void drawPixel(Vec2<int16_t> position, Color color);
     void drawLine(Vec2<int16_t> position, Vec2<> line, Color color);
-    void drawRect(Vec2<int16_t> position, Vec2<int16_t> size, Color border, Color fill);
-    void drawRect(Rect<int16_t> rect, Color border, Color fill);
+    void drawRect(Vec2<int16_t> position, Vec2<int16_t> size, Color border);
+    void drawRect(Rect<int16_t> rect, Color border);
+    void fillRect(Vec2<int16_t> position, Vec2<int16_t> size, Color fill);
+    void fillRect(Rect<int16_t> rect, Color fill);
     void drawCircle(Vec2<int16_t> position, uint16_t radius, Color color, Color fill);
     void drawBitmap(Vec2<int16_t> position, Bitmap bitmap);
     void drawChar(Vec2<int16_t> position, char c, Color color, Color bg, uint8_t size);
