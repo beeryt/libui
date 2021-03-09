@@ -1,7 +1,8 @@
 #include "playback.h"
 #include <assert.h>
 
-static const int16_t padv = 2;
+// TODO: these numbers should consider the text size
+static const int16_t padv = 1;
 static const int16_t padh = 6;
 
 Playback::Playback(Node* parent, int duration)
@@ -34,7 +35,7 @@ void Playback::draw() {
 
   // set slider size
   x = width - 2*textSize.x - 4*padh;
-  y = 8 - 2*padv;
+  y = 7 - 2*padv; // 7 is used instead of 8 since text is 5x7 with 1px padding
   this->slider.setSize({x,y});
 
   // set duration position
