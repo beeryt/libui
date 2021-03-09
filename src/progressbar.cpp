@@ -1,11 +1,11 @@
-#include "slider.h"
+#include "progressbar.h"
 #include <stdio.h>
 
 #define WIDTH 5
 
-Slider::Slider(Node* parent) : Canvas(parent), value(0), min(0), max(100), percent(0) {}
+ProgressBar::ProgressBar(Node* parent) : Canvas(parent), value(0), min(0), max(100), percent(0) {}
 
-void Slider::draw() {
+void ProgressBar::draw() {
   auto pos = getGlobalPosition();
   auto size = getSize();
 
@@ -23,19 +23,19 @@ void Slider::draw() {
     last_width = width;
   }
 
-  // TODO consider optional slider with border
+  // TODO consider making border optional
   fillRect(filled, fg);
   drawRect(empty,  fg*0.125);
 }
 
-void Slider::setPercent() {
+void ProgressBar::setPercent() {
   int total = max - min;
   float percent = (float)(value - min) / total;
   if (this->percent != percent) update();
   this->percent = percent;
 }
 
-void Slider::setVal(int value) {
+void ProgressBar::setVal(int value) {
   if (value < min) value = min;
   if (value > max) value = max;
   if (this->value == 0 && value > 0) update();
@@ -43,20 +43,20 @@ void Slider::setVal(int value) {
   setPercent();
 }
 
-void Slider::setMin(int min) {
+void ProgressBar::setMin(int min) {
   if (min > max) setMax(min);
   if (value < min) setVal(min);
   this->min = min;
   setPercent();
 }
 
-void Slider::setMax(int max) {
+void ProgressBar::setMax(int max) {
   if (max < min) setMin(max);
   if (value > max) setVal(max);
   this->max = max;
   setPercent();
 }
 
-int Slider::getVal() const { return value; }
-int Slider::getMin() const { return min; }
-int Slider::getMax() const { return max; }
+int ProgressBar::getVal() const { return value; }
+int ProgressBar::getMin() const { return min; }
+int ProgressBar::getMax() const { return max; }

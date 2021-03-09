@@ -16,7 +16,7 @@ helper.cpp
   node.cpp
   text.cpp
   playback.cpp
-  slider.cpp
+  progressbar.cpp
   duration.cpp
   sprite.cpp
   basebutton.cpp

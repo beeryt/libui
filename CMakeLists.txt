@@ -24,7 +24,7 @@ target_include_directories(gfx PUBLIC ../external/Adafruit/Adafruit-GFX)
 add_library(ui
   src/node.cpp
   src/canvas.cpp
-  src/slider.cpp
+  src/progressbar.cpp
   src/text.cpp
   src/duration.cpp
   src/playback.cpp

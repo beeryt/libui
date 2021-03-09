@@ -1,16 +1,16 @@
 #include "gtest/gtest.h"
 #include "helper.h"
-#include "slider.h"
+#include "progressbar.h"
 
-TEST(Slider, Constructor) {
-  Slider a;
+TEST(ProgressBar, Constructor) {
+  ProgressBar a;
   EXPECT_EQ(0, a.getMin());
   EXPECT_EQ(0, a.getVal());
   EXPECT_EQ(100, a.getMax());
 }
 
-TEST(Slider, setVal) {
-  Slider a;
+TEST(ProgressBar, setVal) {
+  ProgressBar a;
 
   a.setVal(50);
 
@@ -20,8 +20,8 @@ TEST(Slider, setVal) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setValUpdates) {
-  Slider a;
+TEST(ProgressBar, setValUpdates) {
+  ProgressBar a;
 
   a.process();
   EXPECT_FALSE(a.willDraw());
@@ -30,8 +30,8 @@ TEST(Slider, setValUpdates) {
   EXPECT_TRUE(a.willDraw());
 }
 
-TEST(Slider, setValGreaterThanMax) {
-  Slider a;
+TEST(ProgressBar, setValGreaterThanMax) {
+  ProgressBar a;
   a.setVal(200);
 
   // clamped to max
@@ -43,8 +43,8 @@ TEST(Slider, setValGreaterThanMax) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setValLessThanMin) {
-  Slider a;
+TEST(ProgressBar, setValLessThanMin) {
+  ProgressBar a;
   a.setVal(-200);
 
   // clamped to min
@@ -56,8 +56,8 @@ TEST(Slider, setValLessThanMin) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setMin) {
-  Slider a;
+TEST(ProgressBar, setMin) {
+  ProgressBar a;
   a.setMin(-10);
 
   EXPECT_EQ(-10, a.getMin());
@@ -69,8 +69,8 @@ TEST(Slider, setMin) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setMinUpdates) {
-  Slider a;
+TEST(ProgressBar, setMinUpdates) {
+  ProgressBar a;
 
   a.process();
   EXPECT_FALSE(a.willDraw());
@@ -79,8 +79,8 @@ TEST(Slider, setMinUpdates) {
   EXPECT_TRUE(a.willDraw());
 }
 
-TEST(Slider, setMinGreaterThanValue) {
-  Slider a;
+TEST(ProgressBar, setMinGreaterThanValue) {
+  ProgressBar a;
   a.setMin(10);
 
   EXPECT_EQ(10, a.getMin());
@@ -93,8 +93,8 @@ TEST(Slider, setMinGreaterThanValue) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setMinGreaterThanMax) {
-  Slider a;
+TEST(ProgressBar, setMinGreaterThanMax) {
+  ProgressBar a;
   a.setMin(200);
 
   EXPECT_EQ(200, a.getMin());
@@ -106,8 +106,8 @@ TEST(Slider, setMinGreaterThanMax) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setMax) {
-  Slider a;
+TEST(ProgressBar, setMax) {
+  ProgressBar a;
   a.setMax(50);
 
   EXPECT_EQ(50, a.getMax());
@@ -119,8 +119,8 @@ TEST(Slider, setMax) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setMaxUpdates) {
-  Slider a;
+TEST(ProgressBar, setMaxUpdates) {
+  ProgressBar a;
 
   a.setVal(1); // an update is needed only if the percentage changes
   a.process();
@@ -130,8 +130,8 @@ TEST(Slider, setMaxUpdates) {
   EXPECT_TRUE(a.willDraw());
 }
 
-TEST(Slider, setMaxLessThanValue) {
-  Slider a;
+TEST(ProgressBar, setMaxLessThanValue) {
+  ProgressBar a;
   a.setVal(50);
   a.setMax(10);
 
@@ -145,8 +145,8 @@ TEST(Slider, setMaxLessThanValue) {
   EXPECT_GE(a.getMax(), a.getVal());
 }
 
-TEST(Slider, setMaxLessThanMin) {
-  Slider a;
+TEST(ProgressBar, setMaxLessThanMin) {
+  ProgressBar a;
   a.setMax(-200);
 
   EXPECT_EQ(-200, a.getMax());

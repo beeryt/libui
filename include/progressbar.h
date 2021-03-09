@@ -2,7 +2,7 @@
 #include "canvas.h"
 #include "color.h"
 
-class Slider : public Canvas {
+class ProgressBar : public Canvas {
   private:
     int value, min, max;
     float percent;
@@ -11,7 +11,7 @@ class Slider : public Canvas {
     Color fg = Colors::white;
     Color bg = Colors::black;
   public:
-    Slider(Node* parent = nullptr);
+    ProgressBar(Node* parent = nullptr);
     void draw();
 
     void setVal(int);
