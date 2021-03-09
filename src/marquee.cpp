@@ -1,6 +1,5 @@
 #include "marquee.h"
 #include <cassert>
-#include <string>
 #include <cmath>
 
 Marquee::Marquee(Node* parent, const char* text) : Text(parent, text) {}
