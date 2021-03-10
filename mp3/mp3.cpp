@@ -49,7 +49,6 @@ MP3::MP3(short x, short y) {
 }
 
 void MP3::refreshLayout() {
-  printf("%s\n", __FUNCTION__);
   title.setTextSize(3);
   artist.setTextSize(2);
   title.setSpeed(50);
