@@ -15,7 +15,7 @@ public:
   ButtonMode getMode() const;
 
   void setToggleMode(bool);
-  bool isToggleMode() const;
+  bool getToggleMode() const;
 
   bool isPressed() const;
 
@@ -33,4 +33,5 @@ private:
   ButtonMode mode = ButtonMode::NORMAL;
   bool enabled = true;
   bool toggleMode = false;
+  bool pressed = false;
 };

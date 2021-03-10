@@ -10,6 +10,14 @@ Controls::Controls() :
   addChild(prev);
   addChild(play);
   addChild(next);
+
+  play.setToggleMode(true);
+
+  play.setOnClick([&](){
+      printf("%s button pressed.\n", play.isPressed() ? "Pause" : "Play");
+  });
+  prev.setOnClick([](){printf("Previous button pressed.\n");});
+  next.setOnClick([](){printf("Next button pressed.\n");});
 }
 
 void Controls::refreshLayout() {
