@@ -8,7 +8,7 @@ class BaseButton : public Canvas {
 public:
   BaseButton(Node* parent = NULL);
 
-  typedef void (*OnClickHandler)();
+  using OnClickHandler = std::function<void()>;
   void setOnClick(OnClickHandler onClick);
   const OnClickHandler& getOnClick() const;
 

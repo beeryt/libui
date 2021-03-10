@@ -1,9 +1,6 @@
 #pragma once
 #include "text.h"
-
-#ifndef IAR_COMPILER
 #include <string>
-#endif
 
 class Marquee : public Text {
   protected:

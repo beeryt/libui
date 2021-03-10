@@ -1,7 +1,9 @@
 #pragma once
 #include "event.h"
-#include <vector>
 #include "Adafruit_GFX.h"
+#include <vector>
+#include <functional>
+
 using GFX = Adafruit_GFX;
 
 class Node {
