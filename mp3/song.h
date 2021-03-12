@@ -4,6 +4,7 @@
 
 struct Song {
   std::string title, artist, album;
+  std::string filename;
   int duration;
 };
 
