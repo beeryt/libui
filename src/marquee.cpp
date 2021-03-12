@@ -28,8 +28,11 @@ void Marquee::draw() {
   offset += delta / speed; // advance one pixel every SPEED milliseconds
   delta %= speed; // reset delta for next draw call
 
-  if (textWidth > 0)
-  offset %= textWidth; // TODO: remove abrupt reset
+  if (textWidth > 0) {
+    auto before = offset;
+    offset %= textWidth; // TODO: remove abrupt reset
+    if (before > 0 && offset == 0) delay_countdown = delay;
+  }
 
   // if delay is active, reset offset
   delay_countdown -= delta;
