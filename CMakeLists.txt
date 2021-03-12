@@ -54,6 +54,7 @@ add_custom_command(
   "${PROJECT_SOURCE_DIR}/mp3/pause.png"
   "${PROJECT_SOURCE_DIR}/mp3/prev.png"
   "${PROJECT_SOURCE_DIR}/mp3/next.png"
+  "${PROJECT_SOURCE_DIR}/mp3/songs.txt"
   "${OUTPUT_DIR}"
   VERBATIM)
 message("Image files will be copied to ${OUTPUT_DIR}")
