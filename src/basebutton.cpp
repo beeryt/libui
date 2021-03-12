@@ -22,13 +22,11 @@ ButtonMode BaseButton::getMode() const {
 }
 
 void BaseButton::disable() {
-  setInput(false);
   if (enabled) modeChanged();
   enabled = false;
 }
 
 void BaseButton::enable() {
-  setInput(true);
   if (!enabled) modeChanged();
   enabled = true;
 }

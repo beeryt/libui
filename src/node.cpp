@@ -36,15 +36,8 @@ void Node::removeChild(Node& child) {
   }
 }
 
-void Node::setProcess(bool enable) { processEnabled = enable; }
-bool Node::isProcessEnabled() const { return processEnabled; }
-
-void Node::setInput(bool enable) { inputEnabled = enable; }
-bool Node::isInputEnabled() const { return inputEnabled; }
-
 // process in pre-order so parents can update children first
 void Node::process(uint32_t ms) {
-  if (!processEnabled) return;
   _process(ms);
   auto it = children.begin();
   while (it != children.end()) { (*it++).get().process(ms); }
@@ -52,7 +45,6 @@ void Node::process(uint32_t ms) {
 
 // input is in post-order so children can handle input before parent
 bool Node::input(Event event) {
-  if (!inputEnabled) return false;
   for (auto it = children.begin(); it != children.end(); ++it) {
     auto& n = it->get();
     if (n.input(event)) return true;

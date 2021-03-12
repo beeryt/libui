@@ -22,13 +22,6 @@ TEST(Node, Constructor) {
 	EXPECT_EQ(&c, &b.getChildren()[0].get());
 	// constructor sets parent
 	EXPECT_EQ(&b, c.getParent());
-
-	EXPECT_TRUE(a.isProcessEnabled());
-	EXPECT_TRUE(b.isProcessEnabled());
-	EXPECT_TRUE(c.isProcessEnabled());
-	EXPECT_TRUE(a.isInputEnabled());
-	EXPECT_TRUE(b.isInputEnabled());
-	EXPECT_TRUE(c.isInputEnabled());
 }
 
 TEST(Node, Destructor) {
@@ -103,20 +96,3 @@ TEST(Node, removeChildInvalid) {
   test_NodeRefListParent({ d }, c.getChildren(), &c);
 }
 
-TEST(Node, setProcessEnabled) {
-	Node a;
-	bool values[] = { false, true, false, true };
-	for (auto expected : values) {
-		a.setProcess(expected);
-		EXPECT_EQ(expected, a.isProcessEnabled());
-	}
-}
-
-TEST(Node, setInputEnabled) {
-	Node a;
-	bool values[] = { false, true, false, true };
-	for (auto expected : values) {
-		a.setInput(expected);
-		EXPECT_EQ(expected, a.isInputEnabled());
-	}
-}

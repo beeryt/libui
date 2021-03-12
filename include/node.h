@@ -11,9 +11,6 @@ class Node {
     using NodeList = std::vector<std::reference_wrapper<Node>>;
     Node* parent;
     NodeList children;
-    bool processEnabled = true;
-    bool inputEnabled = true;
-
 
   protected:
     virtual void _process(uint32_t ms);
@@ -31,11 +28,6 @@ class Node {
 
     void addChild(Node& child);
     void removeChild(Node& child);
-
-    void setProcess(bool enable);
-    void setInput(bool enable);
-    bool isProcessEnabled() const;
-    bool isInputEnabled() const;
 
     void setPosition(Vec2<>);
     Vec2<> getPosition() const;

@@ -37,7 +37,6 @@ TEST(BaseButton, disable) {
   a.enable();
   a.disable();
   EXPECT_FALSE(a.isEnabled());
-  EXPECT_FALSE(a.isInputEnabled());
   EXPECT_EQ(ButtonMode::DISABLED, a.getMode());
 }
 
@@ -46,7 +45,6 @@ TEST(BaseButton, enable) {
   a.disable();
   a.enable();
   EXPECT_TRUE(a.isEnabled());
-  EXPECT_TRUE(a.isInputEnabled());
   EXPECT_NE(ButtonMode::DISABLED, a.getMode());
 }
 
