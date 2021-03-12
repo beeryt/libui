@@ -1,4 +1,5 @@
 #include "marquee.h"
+#include <algorithm>
 #include <cassert>
 #include <cmath>
 
@@ -14,6 +15,7 @@ uint32_t Marquee::getSpeed() const { return speed; }
 void Marquee::setDebugColor(Color color) { if (debug_color != color) update(); debug_color = color; }
 
 void Marquee::draw() {
+  if (!text) return;
   int16_t charWidth = 6 * size;
   int16_t charHeight = 8 * size;
   int16_t scrnWidth = std::ceil(static_cast<float>(getSize().x) / charWidth);
@@ -26,6 +28,7 @@ void Marquee::draw() {
   offset += delta / speed; // advance one pixel every SPEED milliseconds
   delta %= speed; // reset delta for next draw call
 
+  if (textWidth > 0)
   offset %= textWidth; // TODO: remove abrupt reset
 
   // if delay is active, reset offset
@@ -33,7 +36,7 @@ void Marquee::draw() {
   if (delay_countdown > 0) offset = 0;
 
   // prepare text for display
-  int16_t charOffset = offset / charWidth;
+  int16_t charOffset = std::min(offset / charWidth, (uint32_t)strlen(text));
   std::string display = std::string{ text }.substr(charOffset, scrnWidth);
   display += ' '; // empty char helps clear end-of-string as moves to left
 
@@ -72,7 +75,9 @@ void Marquee::draw() {
 }
 
 void Marquee::process(uint32_t ms) {
-  const bool needToSlide = strlen(text) > static_cast<size_t>(getSize().x / (6 * size));
+  const size_t maxLength = getSize().x / (6 * size);
+  const size_t length = text ? strlen(text) : 0;
+  const bool needToSlide = length > maxLength;
   if (needToSlide) {
     if (ms > 0) update();
     delta += ms;

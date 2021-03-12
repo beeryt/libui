@@ -21,17 +21,19 @@ void Text::setText(const char* text) {
   int lines = 1;
   int width = 0;
 
-  // for each char: increment count
-  // on newline: set width & increment lines & reset count
-  int count = 0;
-  for (unsigned i = 0; i < strlen(text); ++i) {
-    if (text[i] == '\n') {
-      lines++;
-      width = std::max(width, count);
-      count = 0;
-    } else { count++; }
+  if (text) {
+    // for each char: increment count
+    // on newline: set width & increment lines & reset count
+    int count = 0;
+    for (unsigned i = 0; i < strlen(text); ++i) {
+      if (text[i] == '\n') {
+        lines++;
+        width = std::max(width, count);
+        count = 0;
+      } else { count++; }
+    }
+    width = std::max(width, count);
   }
-  width = std::max(width, count);
 
   // set size based on new text
   setSize({
