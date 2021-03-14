@@ -7,8 +7,8 @@ Node::Node(Node* parent) : parent(parent) {
 }
 
 Node::~Node() {
-  for (auto it = children.begin(); it != children.end(); ++it) {
-    it->get().parent = nullptr;
+  for (auto& it : children) {
+    it.get().parent = nullptr;
   }
 }
 
@@ -27,7 +27,7 @@ void Node::addChild(Node& child) {
 }
 
 void Node::removeChild(Node& child) {
-  for (auto it = children.begin(); it != children.end(); ++it) {
+  for (auto it = children.begin(); it < children.end(); ++it) {
     if (&it->get() == &child) {
       children.erase(it);
       child.parent = nullptr;
@@ -45,8 +45,8 @@ void Node::process(uint32_t ms) {
 
 // input is in post-order so children can handle input before parent
 bool Node::input(Event event) {
-  for (auto it = children.begin(); it != children.end(); ++it) {
-    auto& n = it->get();
+  for (auto& it : children) {
+    auto& n = it.get();
     if (n.input(event)) return true;
   }
   return _input(event);
@@ -77,8 +77,8 @@ void Node::update() { needUpdate = true; }
 void Node::updateAll() {
   auto& children = getChildren();
   update();
-  for (auto it = children.begin(); it != children.end(); ++it) {
-    auto n = &it->get();
+  for (auto& it : children) {
+    auto n = &it.get();
     n->updateAll();
   }
 }
