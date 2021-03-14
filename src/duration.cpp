@@ -13,6 +13,13 @@ Duration::Duration(Node* parent, int time) : Text(parent, "")
 
 Duration::Duration(int time) : Duration(NULL, time) {}
 
+// Handles printf "%02d" since using tiny printf is lacking
+size_t mysnprintf(char* buf, size_t size, uint8_t value) {
+  auto k = snprintf(buf, size, "%d", (value / 10) % 10);
+  k += snprintf(buf+k, size-k, "%d", value % 10);
+  return k;
+}
+
 void Duration::setTime(int time) {
   if (this->time != time) update();
   this->time = time;
@@ -25,8 +32,10 @@ void Duration::setTime(int time) {
   int hour = time / 60 / 60;
 
   int k = 0;
-  if (hour > 0) k = snprintf(display, sizeof(display), "%01d:", hour);
-  snprintf(display + k, sizeof(display) - k, "%02d:%02d", min, sec);
+  if (hour > 0) k = snprintf(display, sizeof(display), "%d", hour);
+  k += mysnprintf(display + k, sizeof(display) - k, min);
+  k += snprintf(display + k, sizeof(display) - k, ":");
+  k += mysnprintf(display + k, sizeof(display) - k, sec);
   setText(display);
 }
 
