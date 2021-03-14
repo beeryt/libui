@@ -26,7 +26,7 @@ void Controls::refreshLayout() {
   next.setSize(smallerIconSize);
   play.setSize(largerIconSize);
 
-  short voffset = (play.getSize().y - next.getSize().y) / 2;
+  short voffset = (play.getSize().y - next.getSize().y) / 4;
   short center = getSize().x / 2;
   short hoffset = (center - prev.getSize().x - play.getSize().x/2)/2;
   short x,y;
