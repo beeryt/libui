@@ -13,7 +13,7 @@ class Text : public Canvas {
     Text(const char* text);
     void draw();
 
-    void setText(const char* text);
+    void setText(const char* text, bool update=true);
     const char* getText() const;
 
     void setColor(Color color);

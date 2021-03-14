@@ -13,6 +13,8 @@ class Marquee : public Text {
     Marquee(Node* parent = nullptr, const char* text = "Marquee");
     Marquee(const char* text);
 
+    void setText(const char*, bool update=false);
+
     void setDelay(uint32_t);
     uint32_t getDelay() const;
 

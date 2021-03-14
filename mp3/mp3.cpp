@@ -68,10 +68,10 @@ void MP3::refreshLayout() {
   const Vec2<short> songDetailPadding{ 24, 0 };
 
   x = size.x - 2 * songDetailPadding.x;
-  y = title.getSize().y;
+  y = 8*title.getTextSize();
   title.setSize({ x,y });
 
-  y = artist.getSize().y;
+  y = 8*artist.getTextSize();
   artist.setSize({ x,y });
 
   x = size.x;

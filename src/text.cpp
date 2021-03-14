@@ -13,33 +13,36 @@ void Text::setTextSize(uint8_t s) {
   size = s;
   setText(text);
 }
+uint8_t Text::getTextSize() const { return size; }
 
-void Text::setText(const char* text) {
+void Text::setText(const char* text, bool updateSize) {
   update(); // always assume update
   this->text = text;
 
-  int lines = 1;
-  int width = 0;
+  if (updateSize) {
+    int lines = 1;
+    int width = 0;
 
-  if (text) {
-    // for each char: increment count
-    // on newline: set width & increment lines & reset count
-    int count = 0;
-    for (unsigned i = 0; i < strlen(text); ++i) {
-      if (text[i] == '\n') {
-        lines++;
-        width = std::max(width, count);
-        count = 0;
-      } else { count++; }
+    if (text) {
+      // for each char: increment count
+      // on newline: set width & increment lines & reset count
+      int count = 0;
+      for (unsigned i = 0; i < strlen(text); ++i) {
+        if (text[i] == '\n') {
+          lines++;
+          width = std::max(width, count);
+          count = 0;
+        } else { count++; }
+      }
+      width = std::max(width, count);
     }
-    width = std::max(width, count);
-  }
 
-  // set size based on new text
-  setSize({
-    static_cast<int16_t>(6 * width * size),
-    static_cast<int16_t>(8 * lines * size)
-  });
+    // set size based on new text
+    setSize({
+      static_cast<int16_t>(6 * width * size),
+      static_cast<int16_t>(8 * lines * size)
+    });
+  }
 }
 const char* Text::getText() const { return text; }
 

@@ -1,10 +1,15 @@
 #include "marquee.h"
 #include <algorithm>
+#include <string>
 #include <cassert>
 #include <cmath>
 
 Marquee::Marquee(Node* parent, const char* text) : Text(parent, text) {}
 Marquee::Marquee(const char* text) : Marquee(nullptr, text) {}
+
+void Marquee::setText(const char* t, bool update) {
+  Text::setText(t, update);
+}
 
 void Marquee::setSmooth(bool s) { if (smooth != s) update(); smooth = s; }
 bool Marquee::getSmooth() const { return smooth; }
@@ -18,7 +23,7 @@ void Marquee::draw() {
   if (!text) return;
   int16_t charWidth = 6 * size;
   int16_t charHeight = 8 * size;
-  int16_t scrnWidth = std::ceil(static_cast<float>(getSize().x) / charWidth);
+  int16_t scrnWidth = static_cast<int16_t>(std::ceil(static_cast<float>(getSize().x) / charWidth));
   int16_t textWidth = strlen(text) * charWidth;
   int16_t charOverhang = getSize().x % charWidth;
 
@@ -41,7 +46,9 @@ void Marquee::draw() {
   // prepare text for display
   int16_t charOffset = std::min(offset / charWidth, (uint32_t)strlen(text));
   std::string display = std::string{ text }.substr(charOffset, scrnWidth);
-  display += ' '; // empty char helps clear end-of-string as moves to left
+  // fill reset of string with spaces
+  int remaining = scrnWidth - display.length();
+  if (remaining > 0) display.append(remaining, ' ');
 
   // determine text location
   int16_t pixelOffset = smooth ? (offset % charWidth) : 0;
