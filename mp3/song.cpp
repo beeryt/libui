@@ -2,6 +2,11 @@
 #include <algorithm>
 #include <random>
 
+#define DEBUG_SONGLIST
+#ifdef DEBUG_SONGLIST
+#include "print.h"
+#endif
+
 bool byTitle(const Song* a, const Song* b) {
   return a->title < b->title;
 }
@@ -22,13 +27,25 @@ void SongList::sort() {
 }
 
 Song* SongList::prev() {
-  if (it == songs.begin()) it = songs.end();
+  if (it == songs.begin()) {
+#ifdef DEBUG_SONGLIST
+    char buf[32];
+    PrintWithBuf(buf, sizeof(buf), "Skipping to end\n");
+#endif
+    it = songs.end();
+  }
   return *it--;
 }
 
 Song* SongList::current() const { return *it; }
 
 Song* SongList::next() {
-  if (it == songs.end()) it = songs.begin();
+  if ((it + 1) == songs.end()) {
+#ifdef DEBUG_SONGLIST
+    char buf[32];
+    PrintWithBuf(buf, sizeof(buf), "Skipping to beginning\n");
+#endif
+    it = songs.begin();
+  }
   return *it++;
 }
