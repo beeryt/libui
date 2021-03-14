@@ -55,8 +55,8 @@ MP3::MP3(short x, short y) {
 }
 
 void MP3::refreshLayout() {
-  title.setTextSize(3);
-  artist.setTextSize(2);
+  title.setTextSize(2);
+  artist.setTextSize(1);
   title.setSpeed(50);
   artist.setSpeed(30);
 
