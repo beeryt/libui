@@ -14,6 +14,8 @@ class SongList {
     void shuffle();
     void sort(); // TODO add criteria
 
+    const std::vector<Song*>& list = songs;
+
     Song* prev();
     Song* current() const;
     Song* next();
