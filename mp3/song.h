@@ -10,16 +10,16 @@ struct Song {
 
 class SongList {
   public:
-    void add(Song);
+    void add(Song*);
     void shuffle();
     void sort(); // TODO add criteria
 
-    Song& prev();
-    Song& current() const;
-    Song& next();
+    Song* prev();
+    Song* current() const;
+    Song* next();
 
   private:
-    std::vector<Song> songs;
-    std::vector<Song>::iterator it = songs.begin();
+    std::vector<Song*> songs;
+    std::vector<Song*>::iterator it = songs.begin();
 };
 

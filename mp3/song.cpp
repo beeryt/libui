@@ -2,11 +2,11 @@
 #include <algorithm>
 #include <random>
 
-bool byTitle(const Song& a, const Song& b) {
-  return a.title < b.title;
+bool byTitle(const Song* a, const Song* b) {
+  return a->title < b->title;
 }
 
-void SongList::add(Song s) {
+void SongList::add(Song* s) {
   songs.push_back(s);
   it = songs.begin();
 }
@@ -21,14 +21,14 @@ void SongList::sort() {
   std::sort(songs.begin(), songs.end(), byTitle);
 }
 
-Song& SongList::prev() {
+Song* SongList::prev() {
   if (it == songs.begin()) it = songs.end();
   return *it--;
 }
 
-Song& SongList::current() const { return *it; }
+Song* SongList::current() const { return *it; }
 
-Song& SongList::next() {
+Song* SongList::next() {
   if (it == songs.end()) it = songs.begin();
   return *it++;
 }

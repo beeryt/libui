@@ -26,7 +26,6 @@ class MP3 : public Canvas {
     MP3(short x, short y);
     void refreshLayout();
 
-    SongList playlist;
     Marquee title;
     Marquee artist;
     Playback playback;
