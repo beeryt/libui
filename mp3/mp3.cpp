@@ -1,6 +1,7 @@
 #include "mp3.h"
 #include "texturebutton.h"
 #include <assert.h>
+#include "print.h"
 
 Controls::Controls() :
   prev(prev_texture),
@@ -12,10 +13,12 @@ Controls::Controls() :
   addChild(next);
 
   play.setToggleMode(true);
-
-  play.setOnClick([&](){
-      printf("%s button pressed.\n", play.isPressed() ? "Pause" : "Play");
-  });
+  auto playClick = [&](){
+    char buf[64];
+      PrintWithBuf(buf, sizeof(buf), "%s button pressed.\n", play.isPressed() ? "Pause" : "Play");
+  };
+  play.setOnClick(playClick);
+  play.getOnClick()();
 
   prev.setOnClick([](){
       printf("Previous button pressed.\n");

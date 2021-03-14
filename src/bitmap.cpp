@@ -4,14 +4,17 @@
 Bitmap::Bitmap() : Bitmap(nullptr, 0, 0) {}
 Bitmap::Bitmap(const uint8_t *bitmap, size_t w, size_t h) : Bitmap(bitmap, {w,h}) {}
 Bitmap::Bitmap(const uint8_t *bitmap, Vec2<size_t> size) : bitmap(bitmap), size(size) {}
-
 bool Bitmap::operator==(const Bitmap& rhs) const {
   if (size != rhs.size) { return false; }
   // we can shortcut if the two objects share the same pointers
   if (bitmap == rhs.bitmap) return true;
   // otherwise we will have to compare memory contents
+  // note: however, this is too expensive instead just assume different
+  return false;
+#if 0
   if (memcmp(bitmap, rhs.bitmap, size.dot())) return false;
   return true;
+#endif
 }
 
 bool Bitmap::operator!=(const Bitmap& rhs) const {
