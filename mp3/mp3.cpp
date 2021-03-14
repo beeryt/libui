@@ -13,20 +13,9 @@ Controls::Controls() :
   addChild(next);
 
   play.setToggleMode(true);
-  auto playClick = [&](){
-    char buf[64];
-      PrintWithBuf(buf, sizeof(buf), "%s button pressed.\n", play.isPressed() ? "Pause" : "Play");
-  };
-  play.setOnClick(playClick);
-  play.getOnClick()();
-
-  prev.setOnClick([](){
-      printf("Previous button pressed.\n");
-  });
-
-  next.setOnClick([](){
-      printf("Next button pressed.\n");
-  });
+  prev.setOnClick([](){});
+  play.setOnClick([](){});
+  next.setOnClick([](){});
 }
 
 void Controls::refreshLayout() {
