@@ -1,7 +1,6 @@
 #include "mp3.h"
 #include "texturebutton.h"
 #include <assert.h>
-#include "print.h"
 
 Controls::Controls() :
   prev(prev_texture),

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <random>
 
-#define DEBUG_SONGLIST
+//#define DEBUG_SONGLIST
 #ifdef DEBUG_SONGLIST
 #include "print.h"
 #endif
