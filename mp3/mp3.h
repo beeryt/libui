@@ -28,6 +28,7 @@ class MP3 : public Canvas {
 
     Marquee title;
     Marquee artist;
+    Marquee album;
     Playback playback;
     Controls controls;
 };

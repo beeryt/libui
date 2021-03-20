@@ -3,7 +3,17 @@
 #include <string>
 
 struct Song {
-  std::string title, artist, album;
+  struct Info {
+    char tag[3];
+    char title[30];
+    char artist[30];
+    char album[30];
+    char year[4];
+    char comment[30];
+    unsigned char genre;
+  };
+
+  Info info;
   std::string filename;
   int duration;
 };

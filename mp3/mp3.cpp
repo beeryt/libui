@@ -46,6 +46,7 @@ void Controls::refreshLayout() {
 MP3::MP3(short x, short y) {
   addChild(title);
   addChild(artist);
+  addChild(album);
   addChild(playback);
   addChild(controls);
   setSize({ x,y });
@@ -54,10 +55,12 @@ MP3::MP3(short x, short y) {
 }
 
 void MP3::refreshLayout() {
-  title.setTextSize(2);
-  artist.setTextSize(1);
+  title.setTextSize(3);
+  artist.setTextSize(2);
+  album.setTextSize(2);
   title.setSpeed(50);
   artist.setSpeed(30);
+  album.setSpeed(30);
 
   const auto size = getSize();
   const auto center = size / 2;
@@ -73,6 +76,9 @@ void MP3::refreshLayout() {
   y = 8*artist.getTextSize();
   artist.setSize({ x,y });
 
+  y = 8*album.getTextSize();
+  album.setSize({ x,y });
+
   x = size.x;
   y = play_texture.getSize().y;
   controls.setSize({ x,y });
@@ -86,6 +92,9 @@ void MP3::refreshLayout() {
 
   y = center.y;
   artist.setPosition(Vec2<>{ x,y });
+
+  y = center.y + artist.getSize().y;
+  album.setPosition(Vec2<>{ x,y });
 
   x = 0;
   y = size.y - playback.getSize().y - controls.getSize().y;

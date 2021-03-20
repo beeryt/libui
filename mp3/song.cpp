@@ -8,7 +8,7 @@
 #endif
 
 bool byTitle(const Song* a, const Song* b) {
-  return a->title < b->title;
+  return a->info.title < b->info.title;
 }
 
 void SongList::add(Song* s) {
