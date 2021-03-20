@@ -9,6 +9,9 @@ Marquee::Marquee(const char* text) : Marquee(nullptr, text) {}
 
 void Marquee::setText(const char* t, bool update) {
   Text::setText(t, update);
+  delta = offset = 0;
+  delay_countdown = delay;
+  last_display = ""; // forces an update
 }
 
 void Marquee::setSmooth(bool s) { if (smooth != s) update(); smooth = s; }
