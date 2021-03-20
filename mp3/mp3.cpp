@@ -47,9 +47,13 @@ MP3::MP3(short x, short y) {
   addChild(title);
   addChild(artist);
   addChild(album);
+  addChild(art);
   addChild(playback);
   addChild(controls);
   setSize({ x,y });
+
+  art.setTexture(art_texture);
+  art.setSize({ 64,64 });
 
   refreshLayout();
 }
@@ -79,6 +83,11 @@ void MP3::refreshLayout() {
   y = 8*album.getTextSize();
   album.setSize({ x,y });
 
+  art.setScale(2);
+  x = center.x - (art.getSize().x / 2);
+  y = (title.getGlobalPosition().y / 2) - (art.getSize().y / 2);
+  art.setPosition({ x,y });
+
   x = size.x;
   y = play_texture.getSize().y;
   controls.setSize({ x,y });
@@ -87,13 +96,14 @@ void MP3::refreshLayout() {
   playback.setSize({ x,y });
 
   x = songDetailPadding.x;
-  y = center.y - title.getSize().y;
+  const short detailVerticalCenter = center.y + 48;
+  y = detailVerticalCenter - title.getSize().y;
   title.setPosition(Vec2<>{ x,y });
 
-  y = center.y;
+  y = detailVerticalCenter;
   artist.setPosition(Vec2<>{ x,y });
 
-  y = center.y + artist.getSize().y;
+  y = detailVerticalCenter + artist.getSize().y + 1;
   album.setPosition(Vec2<>{ x,y });
 
   x = 0;

@@ -37,7 +37,6 @@ struct Color {
     a.color = rgb_to_c(r,g,b);
     return a;
   }
-
 };
 
 bool operator==(const Color& a, const Color& b);

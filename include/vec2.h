@@ -16,7 +16,7 @@ struct Vec2 {
   Vec2& operator-=(const Vec2& rhs);
 
   // multiplication
-  Vec2 operator*(const T& rhs);
+  Vec2 operator*(const T& rhs) const;
   Vec2& operator*=(const T& rhs);
 
   // division

@@ -98,16 +98,20 @@ void Canvas::drawText(Vec2<int16_t> position, const char* text, Color color, Col
 
 // note: Latest Adafruit_GFX has a GFX::drawRGBBitmap method.
 // Unfortunately that is not in this version, so everything is monochrome.
-void Canvas::drawBitmap(Vec2<int16_t> pos, Bitmap bitmap) {
+void Canvas::drawBitmap(Vec2<int16_t> pos, Bitmap bitmap) { drawBitmapScaled(pos, bitmap, 1); }
+void Canvas::drawBitmapScaled(Vec2<int16_t> pos, Bitmap bitmap, uint8_t scale) {
+  if (scale == 0) return;
   auto gfx = getGFXTree();
   if (!gfx) return;
   auto size = bitmap.getSize();
   int i = 0;
   for (size_t h = 0; h < size.y; ++h) {
     for (size_t w = 0; w < size.x; ++w) {
-      float scale = bitmap.getBitmap()[i++] / 255.0f;
-      Color scaled = bitmap.getColor() * scale;
-      gfx->drawPixel(w+pos.x,h+pos.y,scaled.color);
+      float value = bitmap.getBitmap()[i++] / 255.0f;
+      Color color = bitmap.getColor() * value;
+      short x = scale * w + pos.x;
+      short y = scale * h + pos.y;
+      fillRect({ x, y, scale, scale }, color);
     }
   }
 }

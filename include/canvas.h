@@ -35,6 +35,7 @@ class Canvas : public Node {
     void fillRect(Rect<int16_t> rect, Color fill);
     void drawCircle(Vec2<int16_t> position, uint16_t radius, Color color, Color fill);
     void drawBitmap(Vec2<int16_t> position, Bitmap bitmap);
+    void drawBitmapScaled(Vec2<int16_t> position, Bitmap bitmap, uint8_t scale);
     void drawChar(Vec2<int16_t> position, char c, Color color, Color bg, uint8_t size);
     void drawText(Vec2<int16_t> position, const char* text, Color color, Color bg, uint8_t size);
 

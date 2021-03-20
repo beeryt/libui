@@ -52,6 +52,14 @@ Vec2<T> Vec2<T>::operator/(const int& rhs) const {
 }
 
 template <typename T>
+Vec2<T> Vec2<T>::operator*(const T& rhs) const {
+  return Vec2<T>{
+    static_cast<T>(this->x * rhs),
+    static_cast<T>(this->y * rhs)
+  };
+}
+
+template <typename T>
 Vec2<T>& Vec2<T>::operator/=(const int& rhs) {
   this->x /= rhs;
   this->y /= rhs;

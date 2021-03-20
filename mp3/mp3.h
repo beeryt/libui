@@ -3,6 +3,7 @@
 #include "marquee.h"
 #include "playback.h"
 #include "texturebutton.h"
+#include "sprite.h"
 #include "util.h"
 #include "song.h"
 #include <vector>
@@ -13,6 +14,7 @@ extern Bitmap play_texture;
 extern Bitmap pause_texture;
 extern Bitmap next_texture;
 extern Bitmap prev_texture;
+extern Bitmap art_texture;
 
 class Controls : public Canvas {
 public:
@@ -29,6 +31,7 @@ class MP3 : public Canvas {
     Marquee title;
     Marquee artist;
     Marquee album;
+    Sprite art;
     Playback playback;
     Controls controls;
 };
