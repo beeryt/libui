@@ -32,7 +32,8 @@ Song* SongList::prev() {
     char buf[32];
     PrintWithBuf(buf, sizeof(buf), "Skipping to end\n");
 #endif
-    it = songs.end();
+    it = songs.end() - 1;
+    return *it;
   }
   return *it--;
 }
@@ -46,6 +47,7 @@ Song* SongList::next() {
     PrintWithBuf(buf, sizeof(buf), "Skipping to beginning\n");
 #endif
     it = songs.begin();
+    return *it;
   }
   return *it++;
 }
